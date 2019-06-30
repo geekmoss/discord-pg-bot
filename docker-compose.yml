@@ -1,0 +1,8 @@
+version: '3.5'
+
+services:
+  bot:
+    container_name: "PG Bot"
+    build: .
+    volumes:
+      - './src/:/bot'
