@@ -43,7 +43,7 @@ class Lobbies(Module):
             await Lobbies.create(msg, parts[1], parts[2] if len(parts) > 2 and parts[2].isnumeric() else 0)
             return
         elif parts[0] == "delete":
-            await Lobbies.remove(msg, parts[1], prefix)
+            await Lobbies.delete(msg, parts[1], prefix)
             return
         elif parts[0] == "mention":
             await Lobbies.mention(msg, parts[1], prefix)
@@ -171,7 +171,7 @@ class Lobbies(Module):
         pass
 
     @staticmethod
-    async def remove(msg: discord.Message, id_lobby, p):
+    async def delete(msg: discord.Message, id_lobby, p):
         l: Lobby = Lobby.get_or_none(Lobby.id == int(id_lobby))
         if l:
             if l.author_mention == msg.author.mention:
@@ -179,10 +179,7 @@ class Lobbies(Module):
                 await Module.error(msg, "You removed the lobby.")
                 pass
             else:
-                await Module.error(msg, "You are the founder of the lobby, you can't leave it. "
-                                        "If you want to leave the lobby, you can delete it."
-                                        "Use:"
-                                        f"`{p} delete {id_lobby}`")
+                await Module.error(msg, "You are not the founder of the lobby. ")
                 pass
             pass
         else:
