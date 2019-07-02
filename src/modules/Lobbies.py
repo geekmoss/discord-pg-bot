@@ -194,11 +194,11 @@ class Lobbies(Module):
             await Module.error(msg, f"Lobby not found, check your command or try use  `{p} list`.")
             return
 
-        if l.author_mention != msg.author.mention:
-            await Module.error(msg, f"You are not a founder of this lobby.")
-            return
+        # if l.author_mention != msg.author.mention:
+        #     await Module.error(msg, f"You are not a founder of this lobby.")
+        #     return
 
-        content_msg = "Hey, wake up!\n"
+        content_msg = "Hey, wake up! \n"
         mentions = []
         for row in LobbyList.select().where(LobbyList.lobby == int(id_lobby)):
             mentions.append(row.user_mention)
@@ -235,10 +235,10 @@ class Lobbies(Module):
             f"- `{p} join ID` for join into lobby with `ID`\n"
             f"- `{p} leave ID` for leave selected lobby\n"
             f"- `{p} create NAME [SLOTS]` for create lobby with `NAME`, and optional can be set "
+            f"- `{p} lobby mention ID` for mention all of joined users\n"
             "maximum users (`SLOTS`)\n"
             "For lobby owner:\n"
             f"- `{p} lobby remove ID` for remove selected lobby\n"
-            f"- `{p} lobby mention ID` for mention all of joined users\n"
             "\n\n"
             f"Example:\n"
             "```\n"
